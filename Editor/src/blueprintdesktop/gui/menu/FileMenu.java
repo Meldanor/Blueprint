@@ -17,7 +17,10 @@
 
 package blueprintdesktop.gui.menu;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 
 /**
  *
@@ -25,12 +28,70 @@ import javax.swing.JMenu;
  */
 public class FileMenu  extends JMenu {
 
+    private JMenuItem newMenuItem;
+    private JMenuItem openMenuItem;
+    private JMenuItem saveMenuItem;
+    private JMenuItem saveAsMenuItem;
+    private JMenuItem exitMenuItem;
+
     public FileMenu() {
-        initia();
+        super("Datei");
+        initiate();
     }
 
-    private void initia() {
-        throw new UnsupportedOperationException("Not yet implemented");
-    }
+    private void initiate() {
+        newMenuItem = new JMenuItem("Neue Konstruktion");
+        newMenuItem.addActionListener(new ActionListener() {
 
+            @Override
+            public void actionPerformed (ActionEvent e) {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+        });
+        add(newMenuItem);
+
+        openMenuItem = new JMenuItem("Öffnen");
+        openMenuItem.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed (ActionEvent e) {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+        });
+        add(openMenuItem);
+
+        saveMenuItem = new JMenuItem("Speichern");
+        saveMenuItem.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed (ActionEvent e) {
+                throw new UnsupportedOperationException("Not supported yet.");
+                
+            }
+
+        });
+        add(saveMenuItem);
+
+        saveAsMenuItem = new JMenuItem("Speichern unter");
+        saveAsMenuItem.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed (ActionEvent e) {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+        });
+        add(saveAsMenuItem);
+
+        exitMenuItem = new JMenuItem("Beenden");
+        exitMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed (ActionEvent e) {
+                System.exit(0);
+            }
+        });
+        add(exitMenuItem);
+    }
 }

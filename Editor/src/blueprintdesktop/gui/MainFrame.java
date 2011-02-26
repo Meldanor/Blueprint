@@ -56,81 +56,84 @@ public class MainFrame extends JFrame{
     private boolean canceled = false;
 
     public MainFrame(){
-        initComponents();
-        
-    }
-
-    private void initComponents(){
-
+        this.setJMenuBar(new MenuBar(this));
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
-        setJMenuBar(new MenuBar());
-
-        JPanel panel = new JPanel();
-        panel.setLayout(new BorderLayout());
-        panel.setPreferredSize(new Dimension(0,50));
-
-        JLabel label = new JLabel();
-        label.setFont(new Font("Arial",0,18));
-        label.setText("LUA Parser");
-        label.setHorizontalAlignment(SwingConstants.CENTER);
-        panel.add(label,BorderLayout.CENTER);
-        add(panel);
-
-        panel = new JPanel();
-        panel.setPreferredSize(new Dimension(0,20));
-        add(panel);
-
-        panel = new JPanel();
-        panel.setLayout(new BorderLayout());
-        label = new JLabel("original locales_quest.sql");
-        label.setHorizontalAlignment(SwingConstants.CENTER);
-        panel.add(label,BorderLayout.CENTER);
-        add(panel);
-        
-        panel = new JPanel();
-        panel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        localesQuestFileField = new JTextField();
-        localesQuestFileField.setPreferredSize(new Dimension(200,20));
-        localesQuestFileField.setEditable(false);
-        panel.add(localesQuestFileField);
-
-        panel = new JPanel();
-        panel.setLayout(new BorderLayout());
-        label = new JLabel("LUA File");
-        label.setHorizontalAlignment(SwingConstants.CENTER);
-        panel.add(label,BorderLayout.CENTER);
-        add(panel);
-
-        panel = new JPanel();
-        panel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        luaFileField = new JTextField();
-        luaFileField.setPreferredSize(new Dimension(200,20));
-        luaFileField.setEditable(false);
-        panel.add(luaFileField);
-
-        
-
-        panel = new JPanel();
-        panel.setPreferredSize(new Dimension(0,20));
-        add(panel);
-
-        
-
-        panel = new JPanel();
-        panel.setPreferredSize(new Dimension(0,20));
-        add(panel);
-
-        panel = new JPanel();
-        panel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        progressBar = new JProgressBar();
-        progressBar.setStringPainted(true);
-        progressBar.setPreferredSize(new Dimension(300,20));
-        panel.add(progressBar);
-        add(panel);
-
         pack();
 
         setLocationRelativeTo(null);
     }
+
+//    private void initComponents(){
+//
+//        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+//        getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
+//        setJMenuBar(new MenuBar());
+//
+//        JPanel panel = new JPanel();
+//        panel.setLayout(new BorderLayout());
+//        panel.setPreferredSize(new Dimension(0,50));
+//
+//        JLabel label = new JLabel();
+//        label.setFont(new Font("Arial",0,18));
+//        label.setText("LUA Parser");
+//        label.setHorizontalAlignment(SwingConstants.CENTER);
+//        panel.add(label,BorderLayout.CENTER);
+//        add(panel);
+//
+//        panel = new JPanel();
+//        panel.setPreferredSize(new Dimension(0,20));
+//        add(panel);
+//
+//        panel = new JPanel();
+//        panel.setLayout(new BorderLayout());
+//        label = new JLabel("original locales_quest.sql");
+//        label.setHorizontalAlignment(SwingConstants.CENTER);
+//        panel.add(label,BorderLayout.CENTER);
+//        add(panel);
+//
+//        panel = new JPanel();
+//        panel.setLayout(new FlowLayout(FlowLayout.CENTER));
+//        localesQuestFileField = new JTextField();
+//        localesQuestFileField.setPreferredSize(new Dimension(200,20));
+//        localesQuestFileField.setEditable(false);
+//        panel.add(localesQuestFileField);
+//
+//        panel = new JPanel();
+//        panel.setLayout(new BorderLayout());
+//        label = new JLabel("LUA File");
+//        label.setHorizontalAlignment(SwingConstants.CENTER);
+//        panel.add(label,BorderLayout.CENTER);
+//        add(panel);
+//
+//        panel = new JPanel();
+//        panel.setLayout(new FlowLayout(FlowLayout.CENTER));
+//        luaFileField = new JTextField();
+//        luaFileField.setPreferredSize(new Dimension(200,20));
+//        luaFileField.setEditable(false);
+//        panel.add(luaFileField);
+//
+//
+//
+//        panel = new JPanel();
+//        panel.setPreferredSize(new Dimension(0,20));
+//        add(panel);
+//
+//
+//
+//        panel = new JPanel();
+//        panel.setPreferredSize(new Dimension(0,20));
+//        add(panel);
+//
+//        panel = new JPanel();
+//        panel.setLayout(new FlowLayout(FlowLayout.CENTER));
+//        progressBar = new JProgressBar();
+//        progressBar.setStringPainted(true);
+//        progressBar.setPreferredSize(new Dimension(300,20));
+//        panel.add(progressBar);
+//        add(panel);
+//
+//        pack();
+//
+//        setLocationRelativeTo(null);
+//    }
  }

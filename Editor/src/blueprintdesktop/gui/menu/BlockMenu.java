@@ -17,6 +17,8 @@
 
 package blueprintdesktop.gui.menu;
 
+import blueprintdesktop.gui.MainFrame;
+import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -31,16 +33,16 @@ import javax.swing.event.MenuListener;
  */
 public class BlockMenu extends JMenu {
 
-    public BlockMenu() {
-        this.setText("Select Block");
-        add(new BlockPanel());
+    private MainFrame mainFrame = null;
+
+    public BlockMenu(MainFrame parent) {
+        super("Block");
+        this.mainFrame = parent;
+        add(new BlockPanel(this));
     }
 
-    private class BlockPanel extends JPanel {
-
-        public BlockPanel() {
-            this.setSize(100, 100);
-            this.add(new JLabel("FICKEN"));
-        }
+    public MainFrame getMainFrame() {
+        return mainFrame;
     }
+
 }

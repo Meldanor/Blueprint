@@ -17,17 +17,19 @@
 
 package blueprintdesktop.gui.menu;
 
+import blueprintdesktop.gui.MainFrame;
 import javax.swing.JMenuBar;
 
 /**
  *
  * @author Meldanor
  */
-public class MenuBar extends JMenuBar{
+public class MenuBar extends JMenuBar {
 
-    public MenuBar() {
-        add(new BlockMenu());
+    public MenuBar(MainFrame parent) {
+        super();
         add(new FileMenu());
+        add(new BlockMenu(parent));
     }
 
 }
