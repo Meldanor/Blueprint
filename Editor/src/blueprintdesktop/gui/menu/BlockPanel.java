@@ -48,10 +48,9 @@ public class BlockPanel extends JPanel{
     }
     private void readBlocks() {
 
-        
-        File template = new File("Block Location.txt");
+        File template = new File("res/Block Location.txt");
         try {
-            BufferedImage bImage = ImageIO.read(new File("terrain.png"));
+            BufferedImage bImage = ImageIO.read(new File("res/terrain.png"));
             BufferedReader bReader = new BufferedReader(new FileReader(template));
             String line = "";
             while ((line = bReader.readLine()) != null) {

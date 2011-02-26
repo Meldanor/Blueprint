@@ -71,4 +71,10 @@
     nbproject/build-impl.xml file. 
 
     -->
+    <target name = "-post-jar">
+        <copy todir = "Release/res">
+            <fileset dir="res"/>
+        </copy>
+        <copy file = "${dist.jar}" todir = "Release"/>
+    </target>
 </project>
