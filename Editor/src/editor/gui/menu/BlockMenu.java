@@ -79,9 +79,19 @@ public class BlockMenu extends JMenu {
 
         private void loadImages(int width) {
             int index = 0;
-            for (int i = 0 ; i < width ; ++i ) {
-                for (int j = 0 ; j < width ; ++j, ++index) {
-                    this.setValueAt(Block.availableBlocks.get(index), i, j);
+            int maxSize = Block.availableBlocks.size();
+            for (int i = 0 ; maxSize > index && i < width ; ++i ) {
+                for (int j = 0 ; maxSize > index && j < width ; ++j, ++index) {
+                    try {
+                        this.setValueAt(Block.availableBlocks.get(index).getImage(), i, j);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        System.out.println("i = "+i);
+                        System.out.println("j = "+j);
+                        System.out.println("index = "+index);
+                        System.out.println("width = "+width);
+                    }
+                    
                 }
             }
         }

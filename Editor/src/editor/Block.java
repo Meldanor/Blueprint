@@ -5,6 +5,7 @@
 
 package editor;
 
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
@@ -19,12 +20,12 @@ import javax.imageio.ImageIO;
 public class Block {
 
     private int id;
-    private BufferedImage image;
+    private Image image;
     private String name;
     
     public static ArrayList<Block> availableBlocks = new ArrayList<Block>();
 
-    public Block(int id, BufferedImage image, String name) {
+    public Block(int id, Image image, String name) {
         this.id = id;
         this.image = image;
         this.name = name;
@@ -38,7 +39,7 @@ public class Block {
         return id;
     }
 
-    public BufferedImage getImage() {
+    public Image getImage() {
         return image;
     }
 
@@ -48,23 +49,22 @@ public class Block {
 
     public static void loadBlocks() {
         try {
-            BufferedImage bImage = ImageIO.read(new File("res/terrain.png"));
-            int resolution = bImage.getHeight() / 16;
             BufferedReader bReader = new BufferedReader(new FileReader("res/block.txt"));
             String line = "";
             while ((line = bReader.readLine()) != null) {
                 if (line.isEmpty())
                     continue;
                 String[] split = line.split(",");
-                int id = Integer.parseInt(split[3]);
-                int y = Integer.parseInt(split[0]);
-                int x = Integer.parseInt(split[1]);
+                System.out.println(split[0]);
+                BufferedImage bImage = ImageIO.read(new File("res/icons/".concat(split[0])));
+                int id = Integer.parseInt(split[1]);
                 String name = split[2];
-                Block block = new Block(id,bImage.getSubimage(x * resolution, y * resolution, resolution, resolution),name);
+                Block block = new Block(id,bImage.getScaledInstance(30, 30, Image.SCALE_FAST),name);
                 availableBlocks.add(block);
             }
         } catch (Exception e) {
             e.printStackTrace();
+
         }
     }
 }
