@@ -5,9 +5,9 @@
 
 package editor.gui.designGrid;
 
+import editor.Block;
 import java.awt.Component;
 import java.awt.Image;
-import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JTable;
@@ -23,14 +23,14 @@ public class DesignGridRenderer extends DefaultTableCellRenderer {
     public Component getTableCellRendererComponent(
       JTable table, Object value, boolean isSelected,
       boolean hasFocus, int row, int column) {
-      if (value instanceof Image) {
+      if (value instanceof Block) {
           JLabel label = (JLabel) super.getTableCellRendererComponent(
                          table, value, isSelected, hasFocus,
                          row, column);
           // Lediglich Text und Grafik anpassen
           if (value != null) {
             label.setText("");
-            label.setIcon(new ImageIcon((Image)value));
+            label.setIcon(new ImageIcon(((Block)value).getImage()));
           }
           return label;
         }

@@ -6,16 +6,14 @@
 package editor.gui.menu;
 
 import editor.Block;
+import editor.gui.MainFrame;
 import editor.gui.designGrid.DesignGridModel;
-import editor.gui.designGrid.DesignGridRenderer;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import javax.imageio.ImageIO;
+import editor.gui.designGrid.DesignGridTable;
+import javax.swing.ImageIcon;
 import javax.swing.JMenu;
-import javax.swing.JTable;
-import javax.swing.table.TableColumn;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /**
  *
@@ -23,76 +21,47 @@ import javax.swing.table.TableColumn;
  */
 public class BlockMenu extends JMenu {
 
-    public BlockMenu(String name) {
-        super(name);
+    DesignGridTable blockTable;
+
+    public BlockMenu() {
+        super("Block auswählen");
         initiate();
     }
 
     private void initiate() {
-        this.add(new BlockTable());
+        blockTable = new DesignGridTable();
+        int width = 1 + (int) Math.sqrt(Block.availableBlocks.size());
+        DesignGridModel newModel = new DesignGridModel(width,width);
+        blockTable.setModel(newModel);
+        newModel.initiate(blockTable);
+        blockTable.setRowHeight(32);
+
+        blockTable.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (e.getValueIsAdjusting())
+                    return;
+                Block block = (Block)blockTable.getValueAt(blockTable.getSelectedRow(), blockTable.getSelectedColumn());
+                if (block == null)
+                    return;
+                setIcon(new ImageIcon(block.getImage()));
+                setText(block.getName());
+                MainFrame.setCurrentBlock(block);
+            }
+        });
+        blockTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        blockTable.setCellSelectionEnabled(true);
+        loadImages(width);
+        this.add(blockTable);
     }
 
-
-    private class BlockTable extends JTable {
-
-        public BlockTable() {
-            initiate();
-        }
-
-        private void initiate() {
-            int width = 1 + (int) Math.sqrt(Block.availableBlocks.size());
-            
-            this.setModel(new DesignGridModel(width,width));
-
-            setRowHeight(32);
-            for (int j = 0; j < getColumnCount(); ++j) {
-                TableColumn col = this.getColumn(this.getModel().getColumnName(j));
-                col.setWidth(32);
-                col.setMaxWidth(32);
-                col.setMinWidth(32);
-                col.setResizable(false);
-                col.setCellRenderer(new DesignGridRenderer());
-            }
-
-            loadImages(width);
-
-            this.addMouseListener(new MouseListener(){
-                @Override
-                public void mouseClicked(MouseEvent e) {
-
-                }
-                @Override
-                public void mousePressed(MouseEvent e) {
-                }
-                @Override
-                public void mouseReleased(MouseEvent e) {
-                }
-                @Override
-                public void mouseEntered(MouseEvent e) {
-                }
-                @Override
-                public void mouseExited(MouseEvent e) {
-                }
-                
-            });
-        }
-
-        private void loadImages(int width) {
-            int index = 0;
-            int maxSize = Block.availableBlocks.size();
-            for (int i = 0 ; maxSize > index && i < width ; ++i ) {
-                for (int j = 0 ; maxSize > index && j < width ; ++j, ++index) {
-                    try {
-                        this.setValueAt(Block.availableBlocks.get(index).getImage(), i, j);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        System.out.println("i = "+i);
-                        System.out.println("j = "+j);
-                        System.out.println("index = "+index);
-                        System.out.println("width = "+width);
-                    }
-                    
-                }
+    private void loadImages(int width) {
+        int index = 0;
+        int maxSize = Block.availableBlocks.size();
+        for (int i = 0; maxSize > index && i < width; ++i) {
+            for (int j = 0; maxSize > index && j < width; ++j, ++index) {
+                blockTable.setValueAt(Block.availableBlocks.get(index), i, j);
             }
         }
     }

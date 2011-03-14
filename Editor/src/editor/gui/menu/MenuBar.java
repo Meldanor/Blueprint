@@ -18,6 +18,7 @@ public class MenuBar extends JMenuBar {
     }
 
     private void initiate() {
-        add(new BlockMenu("Block"));
+        add(new FileMenu());
+        add(new BlockMenu());
     }
 }

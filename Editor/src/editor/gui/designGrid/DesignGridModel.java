@@ -5,12 +5,10 @@
 
 package editor.gui.designGrid;
 
-import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import javax.imageio.ImageIO;
+import editor.Block;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -18,8 +16,31 @@ import javax.swing.table.DefaultTableModel;
  */
 public class DesignGridModel extends DefaultTableModel{
 
+    private JTable owner = null;
+
+    public DesignGridModel() {
+
+    }
+
     public DesignGridModel(int rowCount, int columnCount) {
         super(rowCount,columnCount);
+    }
+
+    public void initiate(JTable table) {
+        owner = table;
+        editColumns();
+    }
+
+    private void editColumns() {
+
+         for (int j = 0; j < getColumnCount(); ++j) {
+            TableColumn col = owner.getColumn(getColumnName(j));
+            col.setWidth(32);
+            col.setMaxWidth(32);
+            col.setMinWidth(32);
+            col.setResizable(false);
+            col.setCellRenderer(new DesignGridRenderer());
+        }
     }
 
     @Override
@@ -27,7 +48,11 @@ public class DesignGridModel extends DefaultTableModel{
         return false;
     }
 
-
+    @Override
+    public void addColumn(Object columnName) {
+        super.addColumn(columnName);
+        this.editColumns();
+    }
 
 
 }

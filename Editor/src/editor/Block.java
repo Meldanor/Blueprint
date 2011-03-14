@@ -55,13 +55,14 @@ public class Block {
                 if (line.isEmpty())
                     continue;
                 String[] split = line.split(",");
-                System.out.println(split[0]);
                 BufferedImage bImage = ImageIO.read(new File("res/icons/".concat(split[0])));
                 int id = Integer.parseInt(split[1]);
                 String name = split[2];
                 Block block = new Block(id,bImage.getScaledInstance(30, 30, Image.SCALE_FAST),name);
                 availableBlocks.add(block);
             }
+            Block playerBlock = new Block(-1,ImageIO.read(new File("res/icons/Player.png")).getScaledInstance(30, 30, Image.SCALE_FAST),"Player");
+            availableBlocks.add(playerBlock);
         } catch (Exception e) {
             e.printStackTrace();
 
