@@ -36,6 +36,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.TableColumn;
 
 /**
@@ -48,7 +49,6 @@ public class MainFrame extends JFrame {
     private DesignGridModel gridModel = null;
     private static Block currentBlock = null;
     private SaveSystem saveSystem = new SaveSystem();
-    private PlayerBlock playerBlock = null;
 
     public MainFrame () {
         initiate();
@@ -65,6 +65,7 @@ public class MainFrame extends JFrame {
 //        addRightButtons();
 
         createTable(null);
+        this.setLocationRelativeTo(null);
         pack();
     }
 
@@ -178,8 +179,9 @@ public class MainFrame extends JFrame {
         grid.addMouseListener(new ClickListener());
         JScrollPane scrollPane = new JScrollPane(grid);
         grid.setTableHeader(null);
+        grid.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        grid.setCellSelectionEnabled(true);
         add(scrollPane);
-        grid.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
     }
 
     public static void setCurrentBlock (Block block) {
@@ -190,23 +192,27 @@ public class MainFrame extends JFrame {
 
         @Override
         public void mouseClicked (MouseEvent e) {
-            if (currentBlock == null)
-                return;
-            int row = grid.rowAtPoint(e.getPoint());
-            int col = grid.columnAtPoint(e.getPoint());
-            if (currentBlock.isPlayerBlock())
-                if (playerBlock == null)
-                    playerBlock = new PlayerBlock(col, row, ((Layer) gridModel).getIndex());
-                else {
-                    grid.setValueAt(null, playerBlock.getY(), playerBlock.getX());
-                    playerBlock.setNewPosition(col, row, ((Layer) gridModel).getIndex());
-                }
-
-            grid.setValueAt(currentBlock, row, col);
+            
         }
 
         @Override
         public void mousePressed (MouseEvent e) {
+            if (currentBlock == null)
+                return;
+            int row = grid.rowAtPoint(e.getPoint());
+            int col = grid.columnAtPoint(e.getPoint());
+            if (currentBlock.isPlayerBlock()) {
+                PlayerBlock playerBlock = saveSystem.getPlayerBLock();
+                if (playerBlock == null)
+                    saveSystem.initiatePlayerBlock(col, row, ((Layer) gridModel).getIndex());
+                else {
+                    grid.setValueAt(null, playerBlock.getY(), playerBlock.getX());
+                    playerBlock.setNewPosition(col, row, ((Layer) gridModel).getIndex());
+                }
+            }
+
+
+            grid.setValueAt(currentBlock, row, col);
         }
 
         @Override

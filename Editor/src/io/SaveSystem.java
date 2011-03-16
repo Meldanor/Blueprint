@@ -17,8 +17,12 @@
 
 package io;
 
+import editor.Block;
 import editor.Layer;
+import editor.PlayerBlock;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
 
 /**
@@ -30,6 +34,7 @@ public class SaveSystem {
     private ArrayList<Layer> layers = new ArrayList<Layer>();
     private int currentIndex;
     private File currentSaveFile;
+    private PlayerBlock playerBlock ;
 
     public SaveSystem () {
     }
@@ -41,13 +46,13 @@ public class SaveSystem {
         return firstLayer;
     }
 
-    public void save () {
-        saveBlueprint();
+    public boolean save () {
+        return saveBlueprint();
     }
 
-    public void saveAs (File targetFile) {
+    public boolean saveAs (File targetFile) {
         currentSaveFile = targetFile;
-        saveBlueprint();
+        return saveBlueprint();
     }
 
     public Layer getLayer (int index) {
@@ -78,6 +83,61 @@ public class SaveSystem {
         return currentSaveFile;
     }
 
-    private void saveBlueprint () {
+    private boolean saveBlueprint () {
+        BufferedWriter bWriter = null;
+        try {
+            bWriter = new BufferedWriter(new FileWriter(currentSaveFile));
+            // Store the PlayerBlock at first
+
+            bWriter.write(playerBlock.getPositionAsString());
+            bWriter.newLine();
+
+            for(Layer layer : layers) {
+                for(int row = 0 ; row < layer.getRowCount() ; ++row) {
+                    for (int col = 0 ; col < layer.getColumnCount() ; ++col) {
+                        Object o = layer.getValueAt(row, col);
+                        if (o != null) {
+                            Block block = (Block)o;
+                            if (!(block instanceof PlayerBlock)) {
+                                int[] diffPos = playerBlock.differPosition(col, row, layer.getIndex());
+                                bWriter.write(layer.getIndex()+",");
+                                bWriter.write(diffPos[0]+",");
+                                bWriter.write(diffPos[1]+",");
+                                bWriter.write(diffPos[2]+",");
+                                bWriter.write(block.getId()+",");
+                                bWriter.newLine();
+                            }
+                        }
+                    }
+                }
+                bWriter.flush();
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            
+        }
+        finally {
+            try {
+                if (bWriter != null)
+                    bWriter.close();
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public PlayerBlock getPlayerBLock() {
+        return playerBlock;
+    }
+
+    public void initiatePlayerBlock(int x, int y, int z) {
+        if (playerBlock == null)
+            playerBlock = new PlayerBlock(x,y,z);
+        else
+            throw new RuntimeException();
     }
 }

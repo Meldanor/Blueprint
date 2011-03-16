@@ -24,6 +24,7 @@ import java.io.File;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -99,6 +100,10 @@ public class FileMenu extends JMenu {
     }
 
     private void saveBlueprintFile () {
+        if (saveSystem.getPlayerBLock() == null) {
+            JOptionPane.showMessageDialog(this, "Please place at first the player Block.");
+            return;
+        }
         if (saveSystem.getCurrentSaveFile() == null)
             saveAsBlueprintFile();
         else
@@ -106,11 +111,18 @@ public class FileMenu extends JMenu {
     }
 
     private void saveAsBlueprintFile () {
+        if (saveSystem.getPlayerBLock() == null) {
+            JOptionPane.showMessageDialog(this, "Please place at first the player Block.");
+            return;
+        }
         JFileChooser saveFileChooser = new JFileChooser(saveSystem.getCurrentSaveFile());
         saveFileChooser.setDialogType(JFileChooser.OPEN_DIALOG);
         saveFileChooser.showOpenDialog(this);
         File saveFile = saveFileChooser.getSelectedFile();
         if (saveFile != null)
-            saveSystem.saveAs(saveFile);
+             if (!saveSystem.saveAs(saveFile)) {
+                 JOptionPane.showMessageDialog(this, "The save was not sucessfull!");
+             }
+
     }
 }

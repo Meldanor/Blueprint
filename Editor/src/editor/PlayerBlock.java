@@ -29,18 +29,17 @@ public class PlayerBlock extends Block {
 
     /** Represents the x,y and z-Coordinates of the Block. The z-Coordinate
     represents the index of the layers. */
-    private int[] position = new int[3];
+    private int x;
+    private int y;
+    private int z;
     private static Image image = null;
 
-    public PlayerBlock (int[] position) {
-        super(-1, image, "Player");
-        this.position = position;
-    }
 
     public PlayerBlock (int x, int y, int z) {
-        this(new int[]{
-                    x, y, z
-                });
+        super(-1, image, "Player");
+        this.x = x;
+        this.y = y;
+        this.z = z;
     }
 
     public static void loadImage () throws Exception {
@@ -51,36 +50,33 @@ public class PlayerBlock extends Block {
 
     }
 
-    public int[] getPosition () {
-        return position;
-    }
-
     public int getX () {
-        return position[0];
+        return x;
     }
 
     public int getY () {
-        return position[1];
+        return y;
     }
 
     public int getZ () {
-        return position[2];
+        return z;
     }
 
-    public void setNewPosition (int[] newPosition) {
-        position = newPosition;
-    }
 
     public void setNewPosition (int x, int y, int z) {
-        setNewPosition(new int[]{
-                    x, y, z
-                });
+        this.x = x;
+        this.y = y;
+        this.z = z;
     }
 
-    public int[] differPosition (int[] otherPosition) {
+    public int[] differPosition (int x, int y, int z) {
         return new int[]{
-                    position[0] - otherPosition[0],
-                    position[1] - otherPosition[1],
-                    position[2] - otherPosition[2],};
+                    this.x - x,
+                    this.y - y,
+                    this.z - z};
+    }
+
+    public String getPositionAsString() {
+        return x + "," + y + "," + z;
     }
 }

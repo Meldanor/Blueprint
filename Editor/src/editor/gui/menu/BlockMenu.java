@@ -33,7 +33,7 @@ import javax.swing.event.ListSelectionListener;
  */
 public class BlockMenu extends JMenu {
 
-    DesignGridTable blockTable;
+    private DesignGridTable blockTable;
 
     public BlockMenu () {
         super("Block auswählen");
