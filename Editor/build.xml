@@ -71,4 +71,10 @@
     nbproject/build-impl.xml file. 
 
     -->
+    <target name ="-post-jar">
+        <zip destfile="Release/Blueprint.zip">
+            <zipfileset dir="res" prefix="res" />
+            <fileset dir="${dist.dir}" excludes="README.TXT"/>
+        </zip>
+    </target>
 </project>
