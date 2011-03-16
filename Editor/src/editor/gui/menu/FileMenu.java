@@ -1,14 +1,29 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ *  Copyright (C) 2011 Kilian Gaertner
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 package editor.gui.menu;
 
+import io.SaveSystem;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JFileChooser;
 
 /**
  *
@@ -16,25 +31,30 @@ import javax.swing.JMenuItem;
  */
 public class FileMenu extends JMenu {
 
-    public FileMenu() {
+    private SaveSystem saveSystem;
+
+    public FileMenu (SaveSystem saveSystem) {
         super("Datei");
+        this.saveSystem = saveSystem;
         initiate();
     }
 
-    private void initiate() {
+    private void initiate () {
         JMenuItem newFileItem = new JMenuItem("Neuer Blueprint");
-        newFileItem.addActionListener(new ActionListener(){
+        newFileItem.addActionListener(new ActionListener() {
+
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed (ActionEvent e) {
                 createNewFile();
             }
         });
         add(newFileItem);
 
         JMenuItem openFileItem = new JMenuItem("Öffne Blueprint");
-        openFileItem.addActionListener(new ActionListener(){
+        openFileItem.addActionListener(new ActionListener() {
+
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed (ActionEvent e) {
                 openBlueprintFile();
             }
         });
@@ -42,8 +62,9 @@ public class FileMenu extends JMenu {
 
         JMenuItem saveFileItem = new JMenuItem("Speichere Blueprint");
         saveFileItem.addActionListener(new ActionListener() {
+
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed (ActionEvent e) {
                 saveBlueprintFile();
             }
         });
@@ -51,8 +72,9 @@ public class FileMenu extends JMenu {
 
         JMenuItem saveAsFileItem = new JMenuItem("Speichere Blueprint unter...");
         saveAsFileItem.addActionListener(new ActionListener() {
+
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed (ActionEvent e) {
                 saveAsBlueprintFile();
             }
         });
@@ -60,8 +82,9 @@ public class FileMenu extends JMenu {
 
         JMenuItem quitItem = new JMenuItem("Beenden");
         quitItem.addActionListener(new ActionListener() {
+
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed (ActionEvent e) {
                 if (true)
                     System.exit(0);
             }
@@ -69,21 +92,25 @@ public class FileMenu extends JMenu {
         add(quitItem);
     }
 
-    private void openBlueprintFile() {
-        
+    private void openBlueprintFile () {
     }
 
-    private void createNewFile() {
-
-    }
-    
-    private void saveBlueprintFile() {
-        
+    private void createNewFile () {
     }
 
-    private void saveAsBlueprintFile() {
-
+    private void saveBlueprintFile () {
+        if (saveSystem.getCurrentSaveFile() == null)
+            saveAsBlueprintFile();
+        else
+            saveSystem.save();
     }
 
-
+    private void saveAsBlueprintFile () {
+        JFileChooser saveFileChooser = new JFileChooser(saveSystem.getCurrentSaveFile());
+        saveFileChooser.setDialogType(JFileChooser.OPEN_DIALOG);
+        saveFileChooser.showOpenDialog(this);
+        File saveFile = saveFileChooser.getSelectedFile();
+        if (saveFile != null)
+            saveSystem.saveAs(saveFile);
+    }
 }

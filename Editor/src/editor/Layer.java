@@ -1,37 +1,41 @@
 /*
  *  Copyright (C) 2011 Kilian Gaertner
- *
+ * 
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
- *
+ * 
  *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
- *
+ * 
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package editor.gui.designGrid;
+package editor;
 
-import javax.swing.JTable;
+import editor.gui.designGrid.DesignGridModel;
 
 /**
  *
- * @author Meldanor
+ * @author Kilian Gaertner
  */
-public class DesignGridTable extends JTable {
+public class Layer extends DesignGridModel {
 
-    public DesignGridTable () {
-        try {
-            this.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+    private int index;
 
-        }
-        catch (Exception ex) {
-            ex.printStackTrace();
-        }
+    public Layer (int width, int height) {
+        super(width, height);
+    }
+
+    public Layer () {
+        super(100, 100);
+    }
+
+    public int getIndex () {
+        return index;
     }
 }
