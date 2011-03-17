@@ -40,7 +40,7 @@ Fire.png,51,Fire
 Monster_Spawner.png,52,Monster Spawner
 Wooden_Stairs.png,53,Wooden Stairs
 Chest.png,54,Chest
-Redstone_(Wire).png,55,37,Redstone Wire
+Redstone_(Wire).png,55,Redstone Wire
 Diamond_(Ore).png,56,Diamond Ore
 Diamond_(Block).png,57,Diamond Block
 Crafting_Table.png,58,Crafting Table
