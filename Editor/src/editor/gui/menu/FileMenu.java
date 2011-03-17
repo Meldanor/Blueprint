@@ -120,9 +120,9 @@ public class FileMenu extends JMenu {
         saveFileChooser.showOpenDialog(this);
         File saveFile = saveFileChooser.getSelectedFile();
         if (saveFile != null)
-             if (!saveSystem.saveAs(saveFile)) {
+             if (!saveSystem.saveAs(saveFile))
                  JOptionPane.showMessageDialog(this, "The save was not sucessfull!");
-             }
+             
 
     }
 }
