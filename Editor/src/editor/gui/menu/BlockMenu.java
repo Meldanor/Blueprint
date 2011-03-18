@@ -36,7 +36,7 @@ public class BlockMenu extends JMenu {
     private DesignGridTable blockTable;
 
     public BlockMenu () {
-        super("Block auswählen");
+        super("Choose block");
         initiate();
     }
 

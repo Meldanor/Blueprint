@@ -35,13 +35,13 @@ public class FileMenu extends JMenu {
     private SaveSystem saveSystem;
 
     public FileMenu (SaveSystem saveSystem) {
-        super("Datei");
+        super("File");
         this.saveSystem = saveSystem;
         initiate();
     }
 
     private void initiate () {
-        JMenuItem newFileItem = new JMenuItem("Neuer Blueprint");
+        JMenuItem newFileItem = new JMenuItem("New Blueprint");
         newFileItem.addActionListener(new ActionListener() {
 
             @Override
@@ -51,7 +51,7 @@ public class FileMenu extends JMenu {
         });
         add(newFileItem);
 
-        JMenuItem openFileItem = new JMenuItem("Öffne Blueprint");
+        JMenuItem openFileItem = new JMenuItem("Load Blueprint");
         openFileItem.addActionListener(new ActionListener() {
 
             @Override
@@ -61,7 +61,7 @@ public class FileMenu extends JMenu {
         });
         add(openFileItem);
 
-        JMenuItem saveFileItem = new JMenuItem("Speichere Blueprint");
+        JMenuItem saveFileItem = new JMenuItem("Save Blueprint");
         saveFileItem.addActionListener(new ActionListener() {
 
             @Override
@@ -71,7 +71,7 @@ public class FileMenu extends JMenu {
         });
         add(saveFileItem);
 
-        JMenuItem saveAsFileItem = new JMenuItem("Speichere Blueprint unter...");
+        JMenuItem saveAsFileItem = new JMenuItem("Save Blueprint as...");
         saveAsFileItem.addActionListener(new ActionListener() {
 
             @Override
@@ -81,7 +81,7 @@ public class FileMenu extends JMenu {
         });
         add(saveAsFileItem);
 
-        JMenuItem quitItem = new JMenuItem("Beenden");
+        JMenuItem quitItem = new JMenuItem("Exit");
         quitItem.addActionListener(new ActionListener() {
 
             @Override

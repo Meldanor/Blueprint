@@ -72,6 +72,7 @@
 
     -->
     <target name ="-post-jar">
+        <delete dir= "Release" />
         <zip destfile="Release/Blueprint.zip">
             <zipfileset dir="res" prefix="res" />
             <fileset dir="${dist.dir}" excludes="README.TXT"/>
