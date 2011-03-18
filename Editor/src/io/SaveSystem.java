@@ -98,13 +98,12 @@ public class SaveSystem {
                         Object o = layer.getValueAt(row, col);
                         if (o != null) {
                             Block block = (Block)o;
-                            if (!(block instanceof PlayerBlock)) {
+                            if (!block.isPlayerBlock()) {
                                 int[] diffPos = playerBlock.differPosition(col, row, layer.getIndex());
-                                bWriter.write(layer.getIndex()+",");
                                 bWriter.write(diffPos[0]+",");
                                 bWriter.write(diffPos[1]+",");
                                 bWriter.write(diffPos[2]+",");
-                                bWriter.write(block.getId()+",");
+                                bWriter.write(block.getId());
                                 bWriter.newLine();
                             }
                         }
