@@ -103,7 +103,7 @@ public class SaveSystem {
                                 bWriter.write(diffPos[0]+",");
                                 bWriter.write(diffPos[1]+",");
                                 bWriter.write(diffPos[2]+",");
-                                bWriter.write(block.getId());
+                                bWriter.write(Integer.toString(block.getId()));
                                 bWriter.newLine();
                             }
                         }

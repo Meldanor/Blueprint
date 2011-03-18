@@ -65,8 +65,9 @@ public class MainFrame extends JFrame {
 //        addRightButtons();
 
         createTable(null);
-        this.setLocationRelativeTo(null);
+        
         pack();
+        this.setLocationRelativeTo(null);
     }
 
     private void addLeftButtons () {

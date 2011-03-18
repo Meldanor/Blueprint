@@ -119,10 +119,11 @@ public class FileMenu extends JMenu {
         saveFileChooser.setDialogType(JFileChooser.OPEN_DIALOG);
         saveFileChooser.showOpenDialog(this);
         File saveFile = saveFileChooser.getSelectedFile();
-        if (saveFile != null)
-             if (!saveSystem.saveAs(saveFile))
-                 JOptionPane.showMessageDialog(this, "The save was not sucessfull!");
-             
-
+        if (saveFile != null) {
+            if (!saveFile.getName().endsWith(".blueprint"))
+                saveFile = new File(saveFile.getAbsolutePath().concat(".blueprint"));
+                if (!saveSystem.saveAs(saveFile))
+                    JOptionPane.showMessageDialog(this, "The save was not sucessfull!");
+        }
     }
 }

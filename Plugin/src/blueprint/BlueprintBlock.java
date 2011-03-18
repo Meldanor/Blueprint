@@ -32,7 +32,7 @@ public class BlueprintBlock {
 
     public BlueprintBlock(Block block, int typeID) {
         this.block = block;
-        originalID = block.getTypeId();
+        this.originalID = block.getTypeId();
         this.blueprintID = typeID;
     }
 
@@ -49,6 +49,6 @@ public class BlueprintBlock {
     }
 
     public void convertToOriginalBlock() {
-        block.setType(Material.getMaterial(originalID));
+        block.setType(Material.getMaterial(this.originalID));
     }
 }
